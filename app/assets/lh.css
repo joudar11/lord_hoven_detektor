@@ -1,0 +1,285 @@
+/* Styl aplikace Detektor Lorda Hoven (MIT). Barvy a motivy (světlý / tmavý) jsou proměnné --lh-* na začátku. */
+/* ===== Design tokens (světlý a tmavý režim) ===== */
+:root, [data-bs-theme="light"] {
+    --lh-bg: #f4f5f8; --lh-card: #ffffff; --lh-soft: #eff1f5;
+    --lh-border: #e3e6ec; --lh-border-strong: #d2d7e0;
+    --lh-text: #1a1f2b; --lh-text-2: #566074; --lh-text-3: #8a93a3;
+    --lh-accent: #2f6fed; --lh-accent-hover: #2559c9; --lh-accent-soft: #e7efff; --lh-accent-ink: #1a4bb8;
+    --lh-ok: #1f9d57; --lh-ok-soft: #e5f6ec; --lh-ok-ink: #14693a;
+    --lh-bad: #dc3545; --lh-bad-soft: #fdecee; --lh-bad-ink: #a1182a;
+    --lh-warn: #e08a1e; --lh-warn-soft: #fff3df; --lh-warn-ink: #8f5206;
+    --lh-up: #7048c9; --lh-up-soft: #eee9fb; --lh-up-ink: #4a2a9b;
+    --lh-down: #d9480f; --lh-down-soft: #ffeee3; --lh-down-ink: #9c3a05;
+    --lh-virt: #0f9d8a; --lh-virt-soft: #dff4f0; --lh-virt-ink: #0a675a;
+    --lh-wit: #c2255c; --lh-wit-soft: #fde8ef; --lh-wit-ink: #8f1a45;
+    --lh-focus: rgba(47, 111, 237, .22);
+    --lh-shadow: 0 1px 2px rgba(16, 24, 40, .04), 0 1px 3px rgba(16, 24, 40, .06);
+    --bs-body-bg: var(--lh-bg); --bs-body-color: var(--lh-text); --bs-border-color: var(--lh-border);
+    --bs-secondary-color: var(--lh-text-2); --bs-secondary-bg: var(--lh-soft); --bs-tertiary-bg: var(--lh-soft);
+}
+[data-bs-theme="dark"] {
+    --lh-bg: #0e1014; --lh-card: #161a21; --lh-soft: #1e232c;
+    --lh-border: #272d38; --lh-border-strong: #343b49;
+    --lh-text: #e8ebf0; --lh-text-2: #9aa3b2; --lh-text-3: #6f7889;
+    --lh-accent: #6c9bff; --lh-accent-hover: #8bb0ff; --lh-accent-soft: #1b2a4a; --lh-accent-ink: #a9c4ff;
+    --lh-ok: #3ec27a; --lh-ok-soft: #123222; --lh-ok-ink: #86e0ad;
+    --lh-bad: #ff6b7a; --lh-bad-soft: #3b1820; --lh-bad-ink: #ffa3ad;
+    --lh-warn: #f0a043; --lh-warn-soft: #3a2b12; --lh-warn-ink: #ffcb85;
+    --lh-up: #a98bff; --lh-up-soft: #2a2150; --lh-up-ink: #cdbdff;
+    --lh-down: #ff9150; --lh-down-soft: #3b2411; --lh-down-ink: #ffbe92;
+    --lh-virt: #3cc9b4; --lh-virt-soft: #0f3a35; --lh-virt-ink: #8ae6d6;
+    --lh-wit: #ff7aa8; --lh-wit-soft: #3b1a28; --lh-wit-ink: #ffb3cd;
+    --lh-focus: rgba(108, 155, 255, .30);
+    --lh-shadow: 0 1px 2px rgba(0, 0, 0, .4);
+}
+
+/* ===== Základ ===== */
+body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; background: var(--lh-bg); color: var(--lh-text); font-variant-numeric: tabular-nums; -webkit-font-smoothing: antialiased; }
+.lh-ico { vertical-align: -0.15em; flex: none; }
+.card { background: var(--lh-card); border: 1px solid var(--lh-border); border-radius: 18px; box-shadow: var(--lh-shadow); }
+.card-title { font-weight: 700; letter-spacing: -.005em; }
+.lh-card-warn { box-shadow: inset 0 3px 0 var(--lh-warn), var(--lh-shadow); }
+.lh-card-danger { box-shadow: inset 0 3px 0 var(--lh-bad), var(--lh-shadow); }
+.lh-card-admin { box-shadow: inset 0 3px 0 var(--lh-accent), var(--lh-shadow); }
+.lh-box { border: 1px solid var(--lh-border); border-radius: 14px; padding: 1rem; background: var(--lh-card); }
+.lh-box-soft { background: var(--lh-soft); border-color: transparent; }
+hr, .border-top, .border-bottom, .border { border-color: var(--lh-border) !important; }
+
+/* ===== Horní lišta ===== */
+.lh-appbar { display: flex; flex-wrap: wrap; align-items: center; gap: .75rem; margin-bottom: 1.25rem; }
+.lh-title { font-size: 1.4rem; font-weight: 800; letter-spacing: -.02em; margin: 0; flex: 1 1 auto; order: 1; }
+.lh-auth { display: flex; align-items: center; gap: .5rem; order: 2; }
+#theme-toggle { order: 3; }
+.lh-login { display: flex; gap: .5rem; margin: 0; }
+.lh-login .form-control { width: 170px; }
+.lh-iconbtn { display: inline-flex; align-items: center; justify-content: center; gap: .5rem; min-height: 40px; padding: .35rem .8rem; }
+#theme-icon { display: inline-flex; }
+
+/* ===== Tlačítka ===== */
+.btn { border-radius: 12px; font-weight: 600; padding: .6rem 1.1rem; transition: background-color .15s, border-color .15s, color .15s; }
+.btn-sm { border-radius: 10px; padding: .35rem .75rem; font-size: .85rem; }
+.btn-lg { border-radius: 14px; padding: .9rem 1.1rem; font-size: 1.05rem; }
+.btn-primary { --bs-btn-bg: var(--lh-accent); --bs-btn-border-color: var(--lh-accent); --bs-btn-color: #fff; --bs-btn-hover-bg: var(--lh-accent-hover); --bs-btn-hover-border-color: var(--lh-accent-hover); --bs-btn-hover-color: #fff; --bs-btn-active-bg: var(--lh-accent-hover); --bs-btn-active-border-color: var(--lh-accent-hover); --bs-btn-active-color: #fff; --bs-btn-disabled-bg: var(--lh-accent); --bs-btn-disabled-border-color: var(--lh-accent); }
+[data-bs-theme="dark"] .btn-primary { --bs-btn-color: #0e1014; --bs-btn-hover-color: #0e1014; --bs-btn-active-color: #0e1014; }
+.btn-danger { --bs-btn-bg: var(--lh-bad); --bs-btn-border-color: var(--lh-bad); --bs-btn-color: #fff; --bs-btn-hover-bg: #c22b3a; --bs-btn-hover-border-color: #c22b3a; --bs-btn-hover-color: #fff; --bs-btn-active-bg: #b02634; --bs-btn-active-border-color: #b02634; --bs-btn-active-color: #fff; }
+[data-bs-theme="dark"] .btn-danger { --bs-btn-color: #1a0a0d; --bs-btn-hover-color: #1a0a0d; --bs-btn-hover-bg: #ff8591; --bs-btn-hover-border-color: #ff8591; --bs-btn-active-color: #1a0a0d; }
+.btn-success { --bs-btn-bg: var(--lh-ok); --bs-btn-border-color: var(--lh-ok); --bs-btn-color: #fff; --bs-btn-hover-bg: #178248; --bs-btn-hover-border-color: #178248; --bs-btn-hover-color: #fff; --bs-btn-active-bg: #136f3d; --bs-btn-active-border-color: #136f3d; --bs-btn-active-color: #fff; }
+[data-bs-theme="dark"] .btn-success { --bs-btn-color: #07170f; --bs-btn-hover-color: #07170f; --bs-btn-hover-bg: #62d697; --bs-btn-hover-border-color: #62d697; --bs-btn-active-color: #07170f; }
+.btn-secondary { --bs-btn-bg: var(--lh-soft); --bs-btn-border-color: var(--lh-border); --bs-btn-color: var(--lh-text); --bs-btn-hover-bg: var(--lh-border); --bs-btn-hover-border-color: var(--lh-border-strong); --bs-btn-hover-color: var(--lh-text); --bs-btn-active-bg: var(--lh-border-strong); --bs-btn-active-border-color: var(--lh-border-strong); --bs-btn-active-color: var(--lh-text); }
+.btn-outline-secondary { --bs-btn-color: var(--lh-text-2); --bs-btn-border-color: var(--lh-border-strong); --bs-btn-hover-bg: var(--lh-soft); --bs-btn-hover-border-color: var(--lh-border-strong); --bs-btn-hover-color: var(--lh-text); --bs-btn-active-bg: var(--lh-soft); --bs-btn-active-border-color: var(--lh-border-strong); --bs-btn-active-color: var(--lh-text); }
+.btn-outline-primary { --bs-btn-color: var(--lh-accent-ink); --bs-btn-border-color: var(--lh-border-strong); --bs-btn-hover-bg: var(--lh-accent-soft); --bs-btn-hover-border-color: var(--lh-accent); --bs-btn-hover-color: var(--lh-accent-ink); --bs-btn-active-bg: var(--lh-accent); --bs-btn-active-border-color: var(--lh-accent); --bs-btn-active-color: #fff; }
+[data-bs-theme="dark"] .btn-outline-primary { --bs-btn-active-color: #0e1014; }
+.btn-outline-danger { --bs-btn-color: var(--lh-bad-ink); --bs-btn-border-color: var(--lh-border-strong); --bs-btn-hover-bg: var(--lh-bad-soft); --bs-btn-hover-border-color: var(--lh-bad); --bs-btn-hover-color: var(--lh-bad-ink); --bs-btn-active-bg: var(--lh-bad-soft); --bs-btn-active-border-color: var(--lh-bad); --bs-btn-active-color: var(--lh-bad-ink); }
+.btn-outline-success { --bs-btn-color: var(--lh-ok-ink); --bs-btn-border-color: var(--lh-border-strong); --bs-btn-hover-bg: var(--lh-ok-soft); --bs-btn-hover-border-color: var(--lh-ok); --bs-btn-hover-color: var(--lh-ok-ink); --bs-btn-active-bg: var(--lh-ok-soft); --bs-btn-active-border-color: var(--lh-ok); --bs-btn-active-color: var(--lh-ok-ink); }
+.btn-outline-info { --bs-btn-color: var(--lh-virt-ink); --bs-btn-border-color: var(--lh-virt); --bs-btn-hover-bg: var(--lh-virt-soft); --bs-btn-hover-border-color: var(--lh-virt); --bs-btn-hover-color: var(--lh-virt-ink); --bs-btn-active-bg: var(--lh-virt); --bs-btn-active-border-color: var(--lh-virt); --bs-btn-active-color: #fff; }
+[data-bs-theme="dark"] .btn-outline-info { --bs-btn-active-color: #07170f; }
+.btn-outline-up, .btn-outline-down, .btn-outline-wit, .btn-outline-wit2 { --bs-btn-bg: transparent; }
+.btn-outline-wit { --bs-btn-color: var(--lh-wit-ink); --bs-btn-border-color: var(--lh-wit); --bs-btn-hover-bg: var(--lh-wit-soft); --bs-btn-hover-border-color: var(--lh-wit); --bs-btn-hover-color: var(--lh-wit-ink); --bs-btn-active-bg: var(--lh-wit); --bs-btn-active-border-color: var(--lh-wit); --bs-btn-active-color: #fff; }
+.btn-outline-wit2 { --bs-btn-color: var(--lh-wit-ink); --bs-btn-border-color: var(--lh-wit); --bs-btn-hover-bg: var(--lh-wit-soft); --bs-btn-hover-border-color: var(--lh-wit); --bs-btn-hover-color: var(--lh-wit-ink); --bs-btn-active-bg: var(--lh-wit-soft); --bs-btn-active-border-color: var(--lh-wit); --bs-btn-active-color: var(--lh-wit-ink); border-style: dashed; }
+[data-bs-theme="dark"] .btn-outline-wit { --bs-btn-active-color: #2a0f1b; }
+.lh-src-group { flex-wrap: wrap; gap: 6px; }
+.lh-src-group > .btn { border-radius: 10px !important; margin-left: 0 !important; }
+.btn-outline-up { --bs-btn-color: var(--lh-up-ink); --bs-btn-border-color: var(--lh-up); --bs-btn-hover-bg: var(--lh-up-soft); --bs-btn-hover-border-color: var(--lh-up); --bs-btn-hover-color: var(--lh-up-ink); --bs-btn-active-bg: var(--lh-up); --bs-btn-active-border-color: var(--lh-up); --bs-btn-active-color: #fff; }
+.btn-outline-down { --bs-btn-color: var(--lh-down-ink); --bs-btn-border-color: var(--lh-down); --bs-btn-hover-bg: var(--lh-down-soft); --bs-btn-hover-border-color: var(--lh-down); --bs-btn-hover-color: var(--lh-down-ink); --bs-btn-active-bg: var(--lh-down); --bs-btn-active-border-color: var(--lh-down); --bs-btn-active-color: #fff; }
+[data-bs-theme="dark"] .btn-outline-up { --bs-btn-active-color: #140c30; }
+[data-bs-theme="dark"] .btn-outline-down { --bs-btn-active-color: #2a1305; }
+.btn-link { color: var(--lh-accent-ink); }
+
+/* ===== Formuláře ===== */
+.form-label { font-size: .82rem; font-weight: 600; color: var(--lh-text-2); margin-bottom: .35rem; }
+.form-control, .form-select { min-height: 46px; border-radius: 12px; border: 1px solid var(--lh-border-strong); background-color: var(--lh-card); color: var(--lh-text); }
+.form-control-sm, .form-select-sm { min-height: 38px; border-radius: 10px; }
+.form-control::placeholder { color: var(--lh-text-3); }
+.form-control:focus, .form-select:focus { border-color: var(--lh-accent); box-shadow: 0 0 0 4px var(--lh-focus); background-color: var(--lh-card); color: var(--lh-text); }
+.btn:focus-visible, .nav-link:focus-visible { box-shadow: 0 0 0 4px var(--lh-focus); outline: 0; }
+.btn-check:focus-visible + .btn { box-shadow: 0 0 0 4px var(--lh-focus); }
+.alert { border-radius: 14px; border: 0; }
+.alert-success { --bs-alert-bg: var(--lh-ok-soft); --bs-alert-color: var(--lh-ok-ink); }
+.alert-danger { --bs-alert-bg: var(--lh-bad-soft); --bs-alert-color: var(--lh-bad-ink); }
+.alert-warning { --bs-alert-bg: var(--lh-warn-soft); --bs-alert-color: var(--lh-warn-ink); }
+.alert-info { --bs-alert-bg: var(--lh-accent-soft); --bs-alert-color: var(--lh-accent-ink); }
+
+/* ===== Štítky a pilulky ===== */
+.badge { font-weight: 650; border-radius: 999px; padding: .4em .8em; letter-spacing: .01em; }
+.badge.bg-primary { background-color: var(--lh-accent-soft) !important; color: var(--lh-accent-ink) !important; }
+.badge.bg-secondary { background-color: var(--lh-soft) !important; color: var(--lh-text-2) !important; }
+.badge.bg-danger { background-color: var(--lh-bad-soft) !important; color: var(--lh-bad-ink) !important; }
+.badge.bg-warning { background-color: var(--lh-warn-soft) !important; color: var(--lh-warn-ink) !important; }
+.badge.bg-info { background-color: var(--lh-virt-soft) !important; color: var(--lh-virt-ink) !important; }
+.badge-ok { background-color: var(--lh-ok-soft); color: var(--lh-ok-ink); }
+.badge-zesrana { background-color: var(--lh-bad-soft); color: var(--lh-bad-ink); }
+.badge.src-up { background-color: var(--lh-up-soft); color: var(--lh-up-ink); }
+.badge.src-down { background-color: var(--lh-down-soft); color: var(--lh-down-ink); }
+.badge.src-wit { background-color: var(--lh-wit-soft); color: var(--lh-wit-ink); }
+.badge.src-wit2 { background-color: transparent; color: var(--lh-wit-ink); border: 1px dashed var(--lh-wit); }
+.badge.points-badge { font-size: .95rem; }
+.main-badge .badge { background-color: var(--lh-bad) !important; color: #fff !important; }
+[data-bs-theme="dark"] .main-badge .badge { color: #1a0a0d !important; }
+
+/* ===== Dlaždice stavu kabinek ===== */
+.lh-tile { display: flex; align-items: center; gap: .9rem; background: var(--lh-card); border: 1px solid var(--lh-border); border-radius: 18px; padding: .95rem 1.1rem; box-shadow: var(--lh-shadow); height: 100%; }
+.lh-dot { width: 12px; height: 12px; border-radius: 50%; flex: none; background: var(--lh-text-3); box-shadow: 0 0 0 4px var(--lh-soft); }
+.status-card-ok .lh-dot { background: var(--lh-ok); box-shadow: 0 0 0 4px var(--lh-ok-soft); }
+.status-card-zesrana .lh-dot { background: var(--lh-bad); box-shadow: 0 0 0 4px var(--lh-bad-soft); }
+.lh-tile-body { flex: 1 1 auto; min-width: 0; }
+.lh-tile-title { font-weight: 700; font-size: 1.02rem; margin: 0 0 .1rem; }
+.lh-tile-meta { font-size: .8rem; color: var(--lh-text-2); }
+.lh-label { font-weight: 600; }
+#noalibi-list { column-width: 14rem; column-gap: 1.5rem; }
+.lh-innoc-no { cursor: help; text-decoration: underline dotted; }
+.lh-innoc-no.show-reason::after { content: ' (' attr(title) ')'; text-decoration: none; color: var(--lh-text-2); }
+.lh-label-filter { border: 0; background: transparent; padding: 2px 4px; border-radius: 999px; cursor: pointer; }
+.lh-label-filter[aria-pressed="true"] { box-shadow: 0 0 0 2px var(--lh-text-2); }
+.lh-label-filter:focus-visible { outline: 2px solid var(--lh-accent); outline-offset: 2px; }
+.lh-incno { font-weight: 700; color: var(--lh-text-2); margin-right: .15rem; }
+.lh-inc-item > summary { cursor: pointer; }
+.lh-inc-item.is-ignored { opacity: .7; }
+.lh-inc-label { font-size: .72rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--lh-text-3); margin-bottom: .2rem; }
+#record-box > summary, #inc-card > summary { cursor: pointer; }
+/* Stav kabinky v hlášení: vybraná volba je plně zelená (OK) nebo červená (zesraná), stejně výrazná jako modrá volba kabinky */
+#report-form .btn-check:checked + .btn-outline-success, #report-form .btn-check:checked + .btn-outline-success:hover { background-color: var(--lh-ok); border-color: var(--lh-ok); color: #fff; }
+#report-form .btn-check:checked + .btn-outline-danger, #report-form .btn-check:checked + .btn-outline-danger:hover { background-color: var(--lh-bad); border-color: var(--lh-bad); color: #fff; }
+[data-bs-theme="dark"] #report-form .btn-check:checked + .btn-outline-success, [data-bs-theme="dark"] #report-form .btn-check:checked + .btn-outline-success:hover { color: #07170f; }
+[data-bs-theme="dark"] #report-form .btn-check:checked + .btn-outline-danger, [data-bs-theme="dark"] #report-form .btn-check:checked + .btn-outline-danger:hover { color: #1a0a0d; }
+.lh-detail-item.is-day { border-left: 3px solid var(--bs-secondary-bg, #dee2e6); padding-left: .5rem; }
+.lh-suspects-count { font-size: 1.05rem; font-weight: 600; }
+.lh-suspects-count strong { color: var(--lh-bad); font-size: 1.25rem; }
+.lh-tile-note { font-size: .78rem; color: var(--lh-text-2); font-style: italic; margin-top: 2px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; word-break: break-word; }
+.lh-note { white-space: pre-line; word-break: break-word; }
+.lh-box { overflow-wrap: anywhere; }   /* dlouhý text bez mezer (odkaz, 500 znaků v kuse) se zalomí a neroztáhne stránku */
+.lh-tile .badge { font-size: .8rem; }
+.stale-note { color: var(--lh-warn-ink); font-size: .8rem; }
+@keyframes stale-glow {
+    from { box-shadow: 0 0 4px 0 rgba(253, 126, 20, 0.25), var(--lh-shadow); }
+    to   { box-shadow: 0 0 16px 2px rgba(253, 126, 20, 0.6), var(--lh-shadow); }
+}
+.status-card-stale { animation: stale-glow 3s ease-in-out infinite alternate; border-color: var(--lh-warn); }
+@media (prefers-reduced-motion: reduce) {
+    .status-card-stale { animation: none; box-shadow: 0 0 12px 1px rgba(253, 126, 20, 0.5); }
+}
+
+/* ===== Záložky (segmentový přepínač; na mobilu dolní navigace) ===== */
+#main-tabs.nav-tabs { display: inline-flex; flex-wrap: nowrap; gap: 4px; padding: 4px; background: var(--lh-soft); border: 0; border-radius: 999px; max-width: 100%; }
+#main-tabs .nav-item { flex: 0 0 auto; }
+#main-tabs .nav-link { border: 0; border-radius: 999px; padding: .55rem 1.1rem; font-weight: 600; font-size: .92rem; color: var(--lh-text-2); white-space: nowrap; background: transparent; }
+#main-tabs .nav-link:hover { color: var(--lh-text); }
+#main-tabs .nav-link.active { background: var(--lh-card); color: var(--lh-text); box-shadow: 0 1px 3px rgba(16, 24, 40, .12); }
+@media (max-width: 575.98px) {
+    body.py-4 { padding-bottom: calc(96px + env(safe-area-inset-bottom)) !important; }
+    #main-tabs.nav-tabs { position: fixed; left: 12px; right: 12px; bottom: calc(10px + env(safe-area-inset-bottom)); z-index: 1030; display: flex; background: var(--lh-card); border: 1px solid var(--lh-border); box-shadow: 0 8px 24px rgba(16, 24, 40, .18); margin: 0 !important; }
+    #main-tabs .nav-item { flex: 1 1 0; }
+    #main-tabs .nav-link { width: 100%; padding: .65rem .25rem; font-size: .8rem; text-align: center; }
+    .lh-auth { order: 3; flex: 1 1 100%; }
+    .lh-login { flex: 1 1 auto; }
+    .lh-login .form-control { flex: 1 1 auto; width: auto; min-width: 0; }
+    #theme-toggle { order: 2; }
+    #theme-text { display: none; }
+    .card.p-4 { padding: 1rem !important; }
+    .lh-title { font-size: 1.25rem; }
+}
+
+/* ===== Tabulky ===== */
+.table { --bs-table-bg: transparent; --bs-table-color: var(--lh-text); --bs-table-border-color: var(--lh-border); --bs-table-hover-bg: var(--lh-soft); --bs-table-hover-color: var(--lh-text); --bs-table-striped-bg: var(--lh-soft); --bs-table-striped-color: var(--lh-text); }
+.table > thead th { font-size: .72rem; text-transform: uppercase; letter-spacing: .05em; color: var(--lh-text-3); font-weight: 650; border-bottom: 1px solid var(--lh-border); }
+.table-bordered > :not(caption) > * > * { border-width: 0 0 1px; }
+.table-warning { --bs-table-bg: var(--lh-warn-soft); --bs-table-color: var(--lh-warn-ink); --bs-table-border-color: var(--lh-border); }
+.suspect-rank-1 { --bs-table-bg: var(--lh-bad-soft); --bs-table-hover-bg: var(--lh-bad-soft); }
+th.sortable { user-select: none; }
+th.sortable:hover { color: var(--lh-text); }
+.lh-version { font-size: .7rem; font-weight: 400; letter-spacing: 0; color: var(--lh-text-3); white-space: nowrap; }
+.lh-panel-head { display: flex; align-items: center; gap: .5rem; cursor: pointer; user-select: none; margin-bottom: 0 !important; }
+.lh-panel-head[aria-expanded="true"] { margin-bottom: .75rem !important; }
+.lh-panel-head::after { content: '▸'; margin-left: auto; color: var(--lh-text-3); font-size: .9em; }
+.lh-panel-head[aria-expanded="true"]::after { content: '▾'; }
+.lh-panel-head:focus-visible { outline: 2px solid var(--lh-accent); outline-offset: 4px; border-radius: 6px; }
+.lh-panel-head .badge { font-size: .65em; font-weight: 600; }
+tr.incident-row { cursor: pointer; }
+tr.incident-row.is-ignored > td:not(.inc-admin) { opacity: .55; }
+tr.incident-row.is-ignored > td.table-warning { text-decoration: line-through; }
+details.inc-card { background: var(--lh-card); border: 1px solid var(--lh-border); border-radius: 14px; }
+details.inc-card > summary { cursor: pointer; padding: .75rem .9rem !important; }
+details.inc-card[open] > summary { border-bottom: 1px solid var(--lh-border); }
+.inc-person { border-color: var(--lh-border) !important; }
+.pass-chip { display: inline-block; padding: 1px 6px; border-radius: 6px; color: var(--lh-text-2); }
+.pass-chip.pass-active { color: var(--lh-text); font-weight: 600; }
+.pass-chip.pass-active[data-src="1"] { background-color: var(--lh-up-soft); color: var(--lh-up-ink); }
+.pass-chip.pass-active[data-src="2"] { background-color: var(--lh-down-soft); color: var(--lh-down-ink); }
+.pass-chip[data-src="32"] { border: 1px dashed var(--lh-border-strong); }
+.pass-chip.pass-active[data-src="8"] { background-color: var(--lh-wit-soft); color: var(--lh-wit-ink); }
+.pass-chip.pass-active[data-src="16"] { color: var(--lh-wit-ink); box-shadow: inset 0 0 0 1px var(--lh-wit); border-radius: 6px; }
+.lh-detail > summary { display: list-item; cursor: pointer; font-size: .8rem; font-weight: 600; color: var(--lh-text-2); padding: .2rem 0; }
+.lh-detail > summary:hover { color: var(--lh-text); }
+.lh-detail[open] > summary { margin-bottom: .25rem; }
+.lh-detail-item { border-bottom: 1px solid var(--lh-border); padding: .35rem 0; }
+.lh-detail-item.is-virtual { border-left: 3px solid var(--lh-virt); padding-left: .5rem; }
+
+code { color: var(--lh-accent-ink); background: var(--lh-soft); padding: 1px 6px; border-radius: 6px; font-size: .85em; }
+@media (min-width: 768px) {
+    .lh-win-scroll { max-height: 560px; overflow-y: auto; }
+    .lh-win-scroll thead th { position: sticky; top: 0; background: var(--lh-card); z-index: 1; }
+}
+
+/* ===== Pozorování osob (svědectví) ===== */
+.lh-sight { padding: 0; }
+.lh-sight-summary { cursor: pointer; padding: 1rem 1.25rem; font-weight: 700; display: flex; align-items: center; gap: .5rem; list-style: none; }
+.lh-sight-summary::-webkit-details-marker { display: none; }
+.lh-sight-summary::after { content: ""; margin-left: auto; width: 8px; height: 8px; border-right: 2px solid var(--lh-text-2); border-bottom: 2px solid var(--lh-text-2); transform: rotate(45deg); transition: transform .15s; }
+.lh-sight[open] > .lh-sight-summary::after { transform: rotate(-135deg); }
+.lh-sight-body { padding: 0 1.25rem 1.25rem; }
+.lh-suggest { position: absolute; left: 0; right: 0; top: 100%; z-index: 1040; max-height: 260px; overflow-y: auto; border-radius: 12px; box-shadow: 0 8px 24px rgba(16, 24, 40, .18); }
+.lh-suggest .list-group-item { background: var(--lh-card); color: var(--lh-text); border-color: var(--lh-border); }
+
+/* ===== Okno incidentu a modály ===== */
+.modal-content { background: var(--lh-card); border: 1px solid var(--lh-border); border-radius: 22px; box-shadow: 0 24px 60px rgba(0, 0, 0, .28); }
+.modal-header { border: 0; padding: 1.25rem 1.25rem .5rem; }
+.modal-title { font-weight: 700; font-size: 1.1rem; line-height: 1.35; }
+.modal-footer { border: 0; padding: .5rem 1.25rem 1.25rem; }
+
+/* ===== Karty na mobilu ===== */
+@media (max-width: 767.98px) {
+    /* žebříček podezřelých */
+    .lh-susp-table, .lh-susp-table tbody { display: block; }
+    .lh-susp-table thead { display: block; margin-bottom: .25rem; }
+    .lh-susp-table thead tr { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem; }
+    .lh-susp-table thead tr::before { content: "Řadit podle:"; font-size: .78rem; color: var(--lh-text-2); margin-right: .15rem; }
+    .lh-susp-table thead th { display: none; }
+    .lh-susp-table thead th.sortable { display: inline-flex; border: 1px solid var(--lh-border-strong); border-radius: 999px; padding: .3rem .75rem; font-size: .75rem; text-transform: none; letter-spacing: 0; background: var(--lh-card); color: var(--lh-text-2); }
+    .lh-susp-table tr.suspect-row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .5rem .5rem; padding: .9rem; margin-top: .6rem; background: var(--lh-card); border: 1px solid var(--lh-border); border-radius: 16px; }
+    .lh-susp-table tr.suspect-row.suspect-rank-1 { background: var(--lh-bad-soft); border-color: var(--lh-bad); }
+    .lh-susp-table tr.suspect-row > td { display: block; border: 0; padding: 0; background: transparent; box-shadow: none; }
+    .lh-susp-table td:nth-child(1) { grid-column: 1 / 3; }
+    .lh-susp-table td:nth-child(2) { grid-column: 3; text-align: right; }
+    .lh-susp-table tr.suspect-row > td[data-label] { display: flex; align-items: center; justify-content: space-between; gap: .4rem; background: var(--lh-soft); border-radius: 10px; padding: .4rem .6rem; font-size: .78rem; color: var(--lh-text-2); }
+    .lh-susp-table tr.suspect-row > td[data-label]::before { content: attr(data-label); }
+    .lh-susp-table td:nth-child(n+6) { grid-column: 1 / -1; }
+    .lh-susp-table td:nth-child(7) { margin-top: .15rem; }
+    .lh-detail > summary { display: block; cursor: pointer; font-size: .8rem; font-weight: 600; color: var(--lh-text-2); padding: .2rem 0; }
+    #pane-suspects .btn-group-sm > .btn { padding: .4rem .45rem; font-size: .76rem; white-space: nowrap; }
+    #suspects-empty { display: block; }
+    #suspects-empty td { display: block; padding: 1rem 0; }
+    /* časová okna incidentů */
+    .lh-win-table, .lh-win-table tbody { display: block; }
+    .lh-win-table thead { display: none; }
+    .lh-win-table tr.incident-row { display: grid; grid-template-columns: 1fr 1fr; gap: .15rem .75rem; padding: .75rem .25rem; border-bottom: 1px solid var(--lh-border); }
+    .lh-win-table tr.incident-row > td { display: block; border: 0; padding: 0; background: transparent; box-shadow: none; }
+    .lh-win-table tr.incident-row > td:nth-child(1) { grid-column: 1 / -1; font-size: 1rem; }
+    .lh-win-table tr.incident-row > td:nth-child(2) { grid-column: 1 / -1; background: var(--lh-warn-soft); color: var(--lh-warn-ink); border-radius: 10px; padding: .45rem .6rem; }
+    .lh-win-table tr.incident-row > td.inc-admin { grid-column: 1 / -1; }
+    .lh-win-table td[data-label]::before { content: attr(data-label) ": "; color: var(--lh-text-3); font-size: .78rem; }
+    /* historie hlášení */
+    .lh-hist-table, .lh-hist-table tbody { display: block; }
+    .lh-hist-table thead { display: none; }
+    .lh-hist-table tbody tr { display: grid; grid-template-columns: 1fr auto; gap: .1rem .75rem; padding: .8rem .1rem; border-bottom: 1px solid var(--lh-border); }
+    .lh-hist-table tbody tr > td { display: block; border: 0; padding: 0; background: transparent; box-shadow: none; }
+    .lh-hist-table tbody tr > td:nth-child(1) { grid-column: 1; grid-row: 1; }
+    .lh-hist-table tbody tr > td:nth-child(3) { grid-column: 2; grid-row: 1; text-align: right; }
+    .lh-hist-table tbody tr > td:nth-child(2) { grid-column: 1; grid-row: 2; color: var(--lh-text-2); }
+    .lh-hist-table tbody tr > td[data-label] { grid-column: 1 / -1; font-size: .8rem; color: var(--lh-text-2); }
+    .lh-hist-table tbody tr > td[data-label]::before { content: attr(data-label) ": "; color: var(--lh-text-3); }
+    .lh-hist-table tbody tr > td.text-nowrap { grid-column: 1 / -1; margin-top: .4rem; }
+}
+.lh-login > summary { list-style: none; cursor: pointer; }
+.lh-login > summary::-webkit-details-marker { display: none; }
+.lh-login { position: relative; }
+.lh-login > form { position: absolute; right: 0; top: 100%; margin-top: .25rem; z-index: 20; background: var(--lh-card, #fff); padding: .4rem; border-radius: .5rem; box-shadow: 0 .25rem 1rem rgba(0,0,0,.2); min-width: 17rem; }
+

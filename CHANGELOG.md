@@ -1,0 +1,93 @@
+# Přehled změn
+
+Detektor Lorda Hoven. Nejnovější nahoře. Každá nová verze zvyšuje číslo o 0,01, větší změna o 0,10. Verzi čte aplikace z řádku „Verze:“ v hlavičce `app/index.php`.
+
+- **5.00** (2026-10-26): První veřejné vydání: kód zbavený osobních a provozních údajů (domény, IP, cesty), sdílené funkce v `app/lh_common.php`, CSS a skripty v `app/assets/`, Bootstrap přibalený lokálně, ochrana proti CSRF, bezpečné příznaky relace, hlavičky včetně CSP, podpora hashovaného hesla admina, volitelná retence záznamů, přepsatelné texty e-mailů, formulář „Admin“ pro přihlášení heslem (dřív existoval jen koncový bod bez rozhraní), volitelné `db_port` a `db_socket`, kompletní schéma databáze, dokumentace a testy.
+- **4.99** (2026-10-26): Žebříček: detail průchodů u podezřelých je ve výchozím stavu sbalený (na počítači i na mobilu), nadpis „Detail průchodů (N)“ se dá rozkliknout a tlačítko „Rozbalit všechny detaily“ je rozbalí nebo sbalí všechny najednou.
+- **4.98** (2026-10-22): Admin: po ukončení sběru dat lze označit pachatele (banner pro všechny, odznak PACHATEL v žebříčku, filtry ho neskrývají) a volitelně obeznámit e-mailem příjemce souhrnu („dosral svoje poslední hovno“, bez jména); po dopadení se týdenní souhrn z cronu přestane odesílat; opětovné zapnutí sběru označení zruší.
+- **4.97** (2026-10-22): Týdenní souhrn: „Aktuálně podezřelých“ se počítá bez nevinných a důvěryhodných osob (stejně jako ve výchozím zobrazení žebříčku), takže při jediném hlavním podezřelém už nevypíše víc.
+- **4.96** (2026-10-21): Admin: tabulka „Náhledová verze: co vidí uživatelé“ s přepínači (časová osa, průchody, fotky, statistika, historie hlášení); vypnutá část se na serveru nevykreslí a její adresy odmítnou požadavek.
+- **4.95** (2026-10-21): Admin: přepínač „Sběr dat“ vypne vkládání informací všem kromě admina (formuláře se skryjí, POST akce report / report_sighting / report_note server odmítne). „Během dne ve firmě“ ukazuje nejbližší průchody kolem incidentu: poslední před začátkem okna a první po konci okna (s odstupem) a další průchody ten den.
+- **4.94** (2026-10-20): Oprava: dlouhý text bez mezer v poznatku se na mobilu nezalamoval a roztahoval stránku (zalamování u .lh-box, poznatků a záznamu akcí).
+- **4.94** (2026-10-20): Admin: pozorování osob lze upravit (osoba, místo, směr, čas, hlásící, poznámka); stav se nemění, původní záznam se ukládá do záznamu akcí (i při smazání).
+- **4.93** (2026-10-20): Seznam „Důvěryhodní“ (duveryhodni.sql; spravuje admin) a filtr „Skrýt důvěryhodné“ (výchozí zapnutý), který skrývá důvěryhodné osoby v žebříčku a v seznamech Příchod po incidentu, Není člověk, není problém a Ve firmě u každého incidentu, tedy tam, kde „Skrýt nevinné“; při vypnutém filtru mají odznak.
+- **4.92** (2026-10-19): Formulář „Stav toalety“: kabinka (Levá / Pravá / Invalidé, bez slova „kabinka“) a stav (OK zeleně, Zesraná červeně) se vybírají tlačítky ve stejném stylu jako přepínač druhu formuláře.
+- **4.91** (2026-10-19): Import docházky: před uložením se kontrolují záznamy, které už existují u jiného turniketu, a záznamy z budoucnosti; při nálezu se nic neuloží a admin dostane úplný výpis s volbou „importovat vše přesto“ / „bez problematických“ / zrušit.
+- **4.90** (2026-10-19): Admin: aliasy jmen (sloučení variant jména téhož člověka, náhled, návrhy duplicit, uplatnění při importu a zadávání; aliasy.sql) a záznam akcí v aplikaci (audit.sql). Pro všechny: rozšířené počítadlo (nejdelší období bez incidentu, průměr mezi incidenty, mini graf; podle výběru incidentů).
+- **4.84** (2026-10-18): Počítadlo dnů od posledního incidentu bere ohled na výběr incidentů („Zahrnout do výpočtu“, štítky Sjednocení/Průnik).
+- **4.83** (2026-10-18): Filtr „Skrýt nevinné“ je při načtení stránky zapnutý (jde vypnout).
+- **4.82** (2026-10-18): Pod hlavičkou počítadlo dnů od posledního incidentu (nejnovější počítaný incident, vyřazené adminem se nepočítají; 0 = dnes).
+- **4.81** (2026-10-18): Žebříček: nová sekce „Ve firmě u každého incidentu“ (osoby s průchodem v den okna každého vybraného incidentu, v okně i mimo něj; jen incidenty s úplnou docházkou).
+- **4.80** (2026-10-18): Žebříček podezřelých: informace „Během dne ve firmě“ (osoba v okně incidentu nemá průchod, ale v aspoň jeden den okna prošla dveřmi mimo okno): bez bodu, zobrazí se u incidentu v detailu osoby (i osobě bez bodů); u oken přes více dnů stačí jeden den; filtr „Skrýt Během dne ve firmě“.
+- **4.73** (2026-10-17): „Skrýt vyloučené příchodem“ skrývá osoby v žebříčku podezřelých a v „Osobách bez alibi“; seznamy „Příchod po incidentu“ (vč. „Příchod až po incidentu“) se filtrem nemění.
+- **4.71** (2026-10-17): Sekce „Chci zaznamenat“: přepínač i zobrazený formulář jsou vystředěné v jednom sloupci (max. 720 px).
+- **4.70** (2026-10-17): Formuláře hlášení jsou v jedné sbalené sekci „Chci zaznamenat“ s přepínačem (Stav toalety / Pozorování osoby / Jiný poznatek); nový formulář „Jiný poznatek“ a záložka Poznatky (poznatky.sql); sekce Časová okna incidentů je sbalená a po rozbalení bez vlastního scrollování.
+- **4.60** (2026-10-16): Admin: výrazné upozornění na rozpor v nevinnostech (osoba s nevinností u incidentu, která měla v době incidentu, tj. v okně + tolerance, průchod turniketem), s tlačítky „Otevřít incident“ a „Smazat nevinnost“; označení i v detailu incidentu.
+- **4.50** (2026-10-15): Milníky (milniky.sql): admin zadává důležité informace s datem (osoba skončila / nastoupila / je pryč, změna provozu, jiné); vidí je všichni (oddělovače mezi incidenty, statistiky s porovnáním před/po). V detailu incidentu admin vidí osoby mimo firmu po celé okno a může jim vybraným nebo všem najednou udělit nevinnost.
+- **4.40** (2026-10-15): Žebříček: seznam „Není člověk, není problém“ (osoby, které chyběly celý den, a v takové dny se nestal žádný z vybraných incidentů; počítají se jen úplné dny s kontrolou kabinek, značka N, orientační pravděpodobnost shody náhodou, respektuje „Skrýt nevinné“).
+- **4.31** (2026-10-15): Admin, import docházky: přehled posledního nahraného průchodu (celkově a po turniketech) a doporučení, odkud další várku začít.
+- **4.30** (2026-10-15): Žebříček: sekce „Příchod po incidentu“ (příchod = první průchod dne; posuvník 1 až 120 min s tolerancí nastavenou adminem, režim u aspoň jednoho / u všech incidentů, seznamy po / těsně po / před nebo v průběhu / bez průchodu / IT, značky N a P, „Skrýt vyloučené příchodem“).
+- **4.21** (2026-10-15): V záhlaví odkaz „Časová osa“ na vizualizace.php (zobrazí se jen, když je soubor nasazen).
+- **4.20** (2026-10-15): Admin: překladač pseudonymů (kód „Osoba XXXXX“ zpět na jméno přepočtem; bez ukládání a bez záznamu akce).
+- **4.12** (2026-10-15): Admin může anonymizaci osob v náhledové verzi vypnout nebo zapnout (výchozí zapnuto).
+- **4.11** (2026-10-15): Žebříček, pohled „Podle incidentů“: zobrazí se jen karty incidentů vybraných v časových oknech (stejný výběr jako pro podezřelé, statistiky a nevinné).
+- **4.10** (2026-10-15): Náhledová (jen čtecí) verze: jména osob a hlásících se jsou nahrazena stálými pseudonymy „Osoba XXXXX“ (stejná osoba = stejný kód, nelze zpětně odvodit); i v poznámkách, historii, CSV a datech pro JavaScript; našeptávač jmen je v náhledu vypnutý. Plná verze beze změny.
+- **4.03** (2026-10-14): Výběr „Zahrnout do výpočtu“ platí i pro statistiky a předpověď (výchozí určuje admin, uživatel si může vybrat vlastní incidenty; počítá server přes ?ajax=stats). Výpočet a vykreslení statistik jsou funkce lh_stats_compute() a lh_stats_render().
+- **3.93** (2026-10-14): Štítky nad seznamem incidentů: přepínač Sjednocení (výchozí) / Průnik s nápovědou; jen filtr zobrazení v prohlížeči.
+- **3.92** (2026-10-14): Žebříček: tlačítko „Skrýt nevinné“ skryje osoby s odznakem Nevinný (štítky Podezřelý a jejich počet se přepočítají nad zbylými).
+- **3.91** (2026-10-14): Nevinní: v administraci lze zadat víc osob najednou (jedna na řádek) pro jeden nebo víc incidentů; našeptávač pracuje na aktuálním řádku.
+- **3.90** (2026-10-14): Upozornění adminům: v administraci sada zaškrtávátek, které e-maily mají chodit (nový incident, nové pozorování, záznam akcí po skupinách). Bez nastavení je zapnuto vše.
+- **3.82** (2026-10-14): Detail podezřelého: incidenty, u kterých je osoba nevinná, se ukážou jako ostatní, ale místo průchodů a svědectví zelený štítek „Nevinný“ (a důvod).
+- **3.81** (2026-10-14): „Osoby bez alibi“: osoby vyřazené ze žebříčku (blacklisted_suspects) se v sekci nezobrazují.
+- **3.80** (2026-10-14): Seznam všech zaměstnanců v administraci (zamestnanci.sql) a sekce „Osoby bez alibi“ v žebříčku: zaměstnanci bez zadané nevinnosti u vybraných incidentů.
+- **3.72** (2026-10-14): Nevinní: v admin panelu víc incidentů najednou (včetně výběru celého dne), odznak „Nevinný“ u jmen v žebříčku a v kartě incidentu.
+- **3.71** (2026-10-14): Nevinní: abecední řazení podle české abecedy (Č za C apod.).
+- **3.70** (2026-10-14): Nevinní u incidentů: admin zadává osoby (našeptávač, volitelný důvod), všichni je vidí v detailu incidentu a v žebříčku (podle výběru incidentů). Vyžaduje nevinni.sql.
+- **3.61** (2026-10-14): Zabezpečení: plná verze (zápis) jen s platnou tajnou hlavičkou X-Lh-Proxy a adresou example.org (full_hosts), jinak vždy náhled jen ke čtení. Skripty domácího serveru (záloha, souhrn) s vlastním klíčem jsou z brány vyjmuty.
+- **3.60** (2026-10-14): Nová záložka Fotodokumentace pro všechny: seznam souborů ze složky fotodokumentace/<číslo incidentu> (servírováno přes PHP, stejné omezení přístupu jako aplikace).
+- **3.51** (2026-10-13): Štítky nad seznamem incidentů fungují jako přepínače výběru: do výpočtu podezřelých se zahrnou jen incidenty s vybranými štítky (i vyřazené adminem).
+- **3.50** (2026-10-13): Štítky incidentů (např. vzorec znečištění): vytváří, upravuje a přiřazuje jen admin, každý štítek má vlastní barvu, vidí je všichni. Vyžaduje stitky.sql.
+- **3.42** (2026-10-13): Pozorování osoby: karta už není sbalitelná, nadpis stejný jako u hlášení stavu a bez ikony.
+- **3.41** (2026-10-13): Pozorování osoby: „Kde“ je rozbalovací menu místo seznamu tlačítek.
+- **3.40** (2026-10-13): Nové rozložení: hlášení stavu a pozorování vedle sebe, pod nimi seznam incidentů (sbalený: výběr, #, čas nálezu, kdo; rozbalený: všechny detaily). Štítek „Oznámeno“ vidí jen admin.
+- **3.31** (2026-10-13): Rozložení: hlášení stavu nahoře a tabulka časových oken pod ním, obojí na celou šířku.
+- **3.30** (2026-10-13): Stálá čísla incidentů (uložená, nemění se při zpětném zadání ani mazání; vyžaduje cisla_incidentu.sql); poznámky obou ohraničujících hlášení i v přehledu časových oken.
+- **3.20** (2026-10-13): Číslo incidentu (#) všude u incidentů, poznámky obou ohraničujících hlášení v detailu incidentu, filtr historie podle stavu.
+- **3.12** (2026-10-12): Tolerance po nálezu se uplatňuje jen na průchody turniketem; pozorování osob platí pouze přímo v okně incidentu.
+- **3.11** (2026-10-12): Oznámení incidentu: nadpis „Nový útok Lorda Hoven“ (nesklonný přívlastek).
+- **3.10** (2026-10-12): Tolerance po nálezu nastavuje admin (0 až 60 min, výchozí 5); názvy admin panelů bez předpony „Admin Panel:“; u incidentu tlačítko „Oznámit všem“ (e-mail příjemcům týdenního souhrnu) a štítek „Oznámeno“. Vyžaduje oznameni.sql.
+- **3.06** (2026-10-12): V záhlaví žebříčku „Aktuálně podezřelých: N“ (jen při shodě na prvním místě, N > 1; sleduje řazení a filtry).
+- **3.05** (2026-10-12): Hlášení stavu: přísná kontrola vstupů (kabinka, stav, čas, délka jména); neplatné hodnoty se odmítnou hláškou místo chyby 500.
+- **3.04** (2026-10-12): Nepovinná poznámka (max 300 znaků) k hlášení stavu kabinky (vidí všichni) a k pozorování osoby (vidí jen admin). Vyžaduje poznamky.sql.
+- **3.03** (2026-10-12): Admin panely jsou při načtení sbalené a rozbalí se klepnutím na nadpis (jen zobrazení, logika beze změny).
+- **3.02** (2026-10-12): Týdenní souhrn: nové znění („Týdenní hlášení“), řádek „Aktuálně podezřelých“ (počet osob se štítkem Podezřelý), koncový bod pro cron přesunut za výpočet žebříčku.
+- **3.01** (2026-10-12): Záhlaví: tlačítka „Můj účet“ a „Odhlásit“ (odkazy na přihlašovací službu), odebráno pole pro admin heslo; u formulářů se nezobrazuje věta „Jméno se bere z vašeho přihlášení.“ (jméno je zamčené dál).
+- **3.00** (2026-10-12): Přihlášení uživatele z reverzní proxy (Zoraxy): zobrazení „Přihlášen: jméno“, admin podle seznamu admin_users, jméno v hlášeních z přihlášení (admin může hlásit jménem kohokoli), uživatel i zařízení v e-mailech se záznamem akcí, panel Přihlášení uživatelů.
+- **2.94** (2026-10-11): Týdenní souhrn přepsán do tématu „zpráva z fronty“ (útoky, nepřítel), bez vojenského oslovení.
+- **2.93** (2026-10-11): Tlačítko „Poslat testovací digest adminům“: pošle souhrn jen adminům (předmět s [TEST]) a nezmění časovač pravidelného souhrnu.
+- **2.92** (2026-10-11): Týdenní souhrn: kabinky a délka okna jako seznam pod sebou, na konci výzva k hlášení s odkazem místo věty o jménech.
+- **2.91** (2026-10-10): Zobrazení data ve tvaru DD-MM-RRRR místo RRRR-MM-DD (jen zobrazení, vstupy a export CSV beze změny).
+- **2.90** (2026-10-10): Admin panel Zařízení: seznam zařízení podle otisku s názvy, pojmenovat jde i zařízení bez podaného hlášení (admin zařízení se pamatují), název v e-mailech se záznamem akcí. Vyžaduje zarizeni.sql.
+- **2.82** (2026-10-10): Záznam akcí admina e-mailem: seznamy adres se už neořezávají na 200 znaků (chyběl poslední příjemce) a víceřádkové hodnoty jsou na jednom řádku.
+- **2.81** (2026-10-09): Pojistka proti dvojímu odeslání týdenního souhrnu zkrácena z 5 dnů na 24 hodin (zkušební odeslání neblokuje pondělní automatické).
+- **2.80** (2026-10-09): E-maily přes SMTP: upozornění adminům (nový incident, pozorování ke schválení), externí záznam akcí admina, týdenní souhrn bez jmen (spouští domácí server). Seznamy adres v adminu, SMTP v lh_config.php.
+- **2.77** (2026-10-09): Veřejný seznam vyřazených osob: nový text a jen osoby, které by bez vyřazení měly v žebříčku aspoň jeden bod (admin vidí všechny).
+- **2.76** (2026-10-09): Pozorování osoby vcházející do toalet (kabinka i „nevím“) dává bod vždy, stejně jako vycházející (jen „poblíž“ se dál řídí váhou).
+- **2.75** (2026-10-09): Seznam osob vyřazených adminem ze žebříčku vidí i nepřihlášený uživatel (transparentnost), tlačítka pro vrácení jen admin.
+- **2.74** (2026-10-09): Štítek „Podezřelý“: při shodě bodů na prvním místě ho mají všichni z nich, jediný vedoucí zůstává „Hlavní podezřelý“.
+- **2.73** (2026-10-09): Verze aplikace přesunuta do záhlaví vedle názvu (pevný popisek v rohu na mobilu přejížděl přes prvky).
+- **2.72** (2026-10-09): Aktivní verze aplikace se zobrazuje v rohu stránky (jen číslo, changelog se uživatelům nikdy nevypisuje).
+- **2.71** (2026-10-09): Pozorování osoby vycházející z toalet (kabinka i „nevím“) dává bod vždy (nepřesné svědectví), bez ohledu na práh váhy.
+- **2.70** (2026-10-09): Náhledový režim: přes adresu preview.example.org (Host / X-Forwarded-Host nebo hlavička X-Lh-Readonly: 1) se skryjí formuláře a přihlášení a žádný POST nic nezmění.
+- **2.60** (2026-10-09): Výběr incidentů pro výpočet podezřelých: sloupec „Zahrnout do výpočtu podezřelých“ (jen v prohlížeči, bez ukládání), v adminu přepínače „pro všechny“ a „jen pro admina“. Vyžaduje nastaveni_aplikace.sql.
+- **2.50** (2026-10-08): Přepínač „počítá se“ u každého incidentu (admin): vyřazený incident zůstává vidět se stavem a důvodem pro všechny, ale nepočítá se do žebříčku, statistik ani předpovědi. Vyžaduje incidenty_pocitani.sql.
+- **2.41** (2026-10-08): Automatické stažení zálohy domácím serverem: POST action=backup_token s klíčem backup_token v hlavičce X-Backup-Token (volitelný klíč v lh_config.php, jinak je funkce vypnutá).
+- **2.40** (2026-10-08): Admin: tlačítko „Stáhnout zálohu“ (SQL dump celé databáze, gzip, streamovaně) pro zálohování bez přístupu k databázi zvenčí.
+- **2.32** (2026-10-08): Každé schválené pozorování v časovém okně incidentu je vidět (i bez bodu: pod prahem, pisoár, jiná kabinka), s důvodem; počet pozorování v okně u incidentu v tabulce oken a v kartě incidentu.
+- **2.31** (2026-10-08): Admin panel pozorování osob: u každé karty popisky „viděno“ (čas pozorování), „odesláno“ a „vyřízeno“.
+- **2.30** (2026-10-08): Čtečka na dveřích IT: nový turniket „IT dveře“ (počítá se jako 4. patro), u každého člena IT datum, od kterého se přestanou přidělovat virtuální body (nové incidenty), jména z čtečky se sloučí s členy IT. Vyžaduje it_pikacka.sql.
+- **2.21** (2026-10-08): Opraveno překrývání dolní navigace posledním řádkem stránky na mobilu; stejné jméno ve svědectvích se nerozdělí na více podezřelých a člen IT se svědectvím už nedostane navíc virtuální bod.
+- **2.20** (2026-10-08): Pozorování osob na toaletách (svědectví): formulář, schvalování adminem, nové zdroje bodů (přesné a nepřesné svědectví), váhy podle umístění a činnosti. Vyžaduje pozorovani.sql.
+- **2.10** (2026-10-08): Redesign vzhledu bez funkčních změn: nové barvy a komponenty, tmavý režim, karty místo tabulek na mobilu, dolní navigace, ikony místo emoji, jemnější grafy, posuvný seznam oken na počítači.
+- **2.01** (2026-10-08): Přidán favicon (favicon.ico ve stejné složce jako index.php).
+- **2.00** (2026-10-08): Výchozí verze: hlášení stavu kabinek, incidenty a časová okna, žebříček podezřelých (filtr zdrojů, pohled podle incidentů), admin (import, IT a dovolené, blacklist, úpravy), historie s limitem, statistiky a předpověď, log zařízení a IP, konfigurace v lh_config.php.

@@ -1,0 +1,108 @@
+/* Styl vizualizace (časové osy) aplikace Detektor Lorda Hoven (MIT). */
+:root{--bg:#f4f6fb;--card:#fff;--text:#1a1f2b;--muted:#5d6678;--border:#d9deea;--accent:#2f6df0;--row:#f8f9fd;--row2:#f1f3fa;--grid:#e3e7f2;--ok:#16a34a;--bad:#dc2626;--warn:#d97706;--sheet:#fff;--hatch:rgba(120,130,150,.28)}
+html[data-theme=dark]{--bg:#12151c;--card:#1b2029;--text:#e6e9f0;--muted:#98a2b6;--border:#2c3342;--accent:#6d9bff;--row:#1b2029;--row2:#202633;--grid:#2c3342;--ok:#34d399;--bad:#f87171;--warn:#fbbf24;--sheet:#222836;--hatch:rgba(150,160,180,.25)}
+html[data-theme=dark]{color-scheme:dark}html[data-theme=light]{color-scheme:light}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--text);font:15px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;-webkit-text-size-adjust:100%}
+a{color:var(--accent)}
+.wrap{max-width:1500px;margin:0 auto;padding:12px 12px 40px}
+header{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;margin-bottom:10px}
+h1{font-size:1.15rem;margin:0}
+.ver{font-size:.75rem;color:var(--muted)}
+.spacer{flex:1}
+.btn{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--border);background:var(--card);color:var(--text);border-radius:10px;padding:8px 12px;font:inherit;font-size:.9rem;cursor:pointer;text-decoration:none;min-height:40px}
+.btn:hover{border-color:var(--accent)}
+.btn.on{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn.sm{padding:5px 10px;min-height:34px;font-size:.85rem}
+.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:8px}
+.bar label{font-size:.8rem;color:var(--muted)}
+.bar input,.bar select{font:inherit;font-size:.9rem;border:1px solid var(--border);border-radius:8px;background:var(--card);color:var(--text);padding:6px 8px;min-height:36px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;padding-bottom:4px;margin-bottom:8px}   /* všechny vrstvy a přepínače jsou vidět, řádek se zalamuje */
+.chip{flex:0 0 auto;border:1px solid var(--border);border-radius:999px;padding:5px 11px;font-size:.85rem;background:var(--card);color:var(--muted);cursor:pointer;user-select:none;white-space:nowrap}
+.chip.on{color:var(--text);border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
+.chip i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+#stage{position:relative;background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden}
+#cv{display:block;width:100%;touch-action:pan-y;cursor:grab;outline:none}
+#cv:active{cursor:grabbing}
+#msg{position:absolute;left:0;right:0;top:50%;text-align:center;color:var(--muted);pointer-events:none;padding:0 16px}
+#load{position:absolute;right:10px;top:8px;font-size:.75rem;color:var(--muted);background:var(--card);border:1px solid var(--border);border-radius:8px;padding:2px 8px;display:none}
+.zoom{position:absolute;right:8px;bottom:8px;display:flex;gap:6px}
+.zoom .btn{padding:0;width:40px;justify-content:center;font-size:1.15rem}
+#tip{position:fixed;z-index:30;pointer-events:none;background:var(--sheet);color:var(--text);border:1px solid var(--border);border-radius:8px;padding:6px 9px;font-size:.8rem;box-shadow:0 4px 18px rgba(0,0,0,.18);display:none;max-width:280px}
+#sheet{position:fixed;z-index:40;background:var(--sheet);color:var(--text);border:1px solid var(--border);box-shadow:0 8px 30px rgba(0,0,0,.25);display:none;overflow:auto}
+#sheet h2{font-size:1rem;margin:0 0 6px;padding-right:34px}
+#sheet .x{position:absolute;right:8px;top:6px;width:34px;height:34px;border:0;background:transparent;color:var(--muted);font-size:1.4rem;cursor:pointer}
+#sheet dl{margin:8px 0 0;display:grid;grid-template-columns:auto 1fr;gap:3px 12px;font-size:.88rem}
+#sheet dt{color:var(--muted)}
+#sheet dd{margin:0;word-break:break-word}
+.badge{display:inline-block;border-radius:999px;padding:1px 9px;font-size:.75rem;font-weight:600;margin:0 4px 4px 0;color:#fff;background:#6b7280}
+.warnbox{margin-top:10px;border:1px solid var(--warn);border-radius:10px;padding:8px 10px;font-size:.84rem;background:rgba(217,119,6,.08)}
+.warnbox b{color:var(--warn)}
+.warnbox ul{margin:4px 0 0;padding-left:18px}
+#list{display:none;background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden}
+.dayh{position:sticky;top:0;background:var(--row2);padding:6px 12px;font-weight:600;font-size:.85rem;border-bottom:1px solid var(--border)}
+.li{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border-bottom:1px solid var(--grid);cursor:pointer;min-height:48px}
+.li:active{background:var(--row2)}
+.li .tm{flex:0 0 46px;font-variant-numeric:tabular-nums;color:var(--muted);font-size:.85rem;padding-top:2px}
+.li .dot{flex:0 0 12px;height:12px;border-radius:4px;margin-top:5px}
+.li .tx{flex:1;min-width:0}
+.li .tx small{display:block;color:var(--muted)}
+.empty{padding:30px 16px;text-align:center;color:var(--muted)}
+.li .dot.ring{background:transparent!important;border:2px solid;box-sizing:border-box;border-radius:50%}
+.sum{padding:8px 12px;color:var(--muted);font-size:.8rem;border-bottom:1px solid var(--grid)}
+.moreb{display:block;margin:10px auto}
+#filters{margin-bottom:8px}
+.frow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:8px}
+.frow>label{font-size:.8rem;color:var(--muted)}
+.pbox{position:relative;flex:1 1 260px;max-width:440px}
+.pbox input{width:100%;box-sizing:border-box;font:inherit;font-size:.9rem;border:1px solid var(--border);border-radius:8px;background:var(--card);color:var(--text);padding:6px 10px;min-height:38px}
+#pSug{display:none;position:absolute;left:0;right:0;top:calc(100% + 4px);z-index:25;background:var(--sheet);border:1px solid var(--border);border-radius:10px;box-shadow:0 8px 24px rgba(0,0,0,.2);max-height:280px;overflow:auto}
+#pSug .opt{padding:10px 12px;cursor:pointer;min-height:40px;box-sizing:border-box;display:flex;align-items:center}
+#pSug .opt.act,#pSug .opt:hover{background:var(--row2)}
+.pchips{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.pchip{display:inline-flex;align-items:center;gap:2px;border:1px solid var(--accent);border-radius:999px;padding:2px 3px 2px 11px;font-size:.85rem;background:var(--card)}
+.pchip button{border:0;background:transparent;color:var(--muted);cursor:pointer;font-size:1.1rem;line-height:1;padding:2px 7px;min-width:30px;min-height:30px}
+.seg{display:inline-flex;border:1px solid var(--border);border-radius:10px;overflow:hidden}
+.seg button{border:0;background:var(--card);color:var(--muted);font:inherit;font-size:.85rem;padding:6px 12px;min-height:34px;cursor:pointer}
+.seg button.on{background:var(--accent);color:#fff}
+/* karta Časová okna incidentů (stejná logika výběru jako v hlavní aplikaci) */
+.icard{border:1px solid var(--border);border-radius:14px;background:var(--card);margin-bottom:10px;overflow:hidden}
+.icard>summary{cursor:pointer;padding:10px 14px;font-weight:600;list-style:none;display:flex;gap:10px;align-items:center;min-height:44px}
+.icard>summary::-webkit-details-marker{display:none}
+.icard>summary::before{content:'▸';color:var(--muted)}
+.icard[open]>summary::before{content:'▾'}
+.ibody{padding:0 14px 12px}
+.ilist{display:flex;flex-direction:column;gap:6px;margin-top:8px}
+.irow{border:1px solid var(--border);border-radius:10px;background:var(--card)}
+.irow.ign .ihead{opacity:.6}
+.ihead{display:flex;flex-wrap:wrap;gap:4px 12px;align-items:center;padding:6px 10px;cursor:pointer;min-height:46px}
+.ihead .chk{display:inline-flex;align-items:center;gap:7px;font-size:.85rem;color:var(--muted);cursor:pointer;min-height:36px}
+.ihead .chk input{width:18px;height:18px;margin:0}
+.ihead .no{font-weight:700}
+.ihead .tmx{font-variant-numeric:tabular-nums}
+.ihead .by{color:var(--muted)}
+.idet{display:none;padding:2px 12px 10px;border-top:1px solid var(--grid)}
+.irow.open .idet{display:block}
+.idet dl{display:grid;grid-template-columns:minmax(110px,150px) 1fr;gap:4px 10px;margin:8px 0;font-size:.88rem}
+.idet dt{color:var(--muted)}
+.idet dd{margin:0;word-break:break-word}
+.small{font-size:.8rem;color:var(--muted)}
+.note{font-size:.78rem;color:var(--muted);margin-top:8px}
+#moreBtn{display:none}
+@media (min-width:760px){
+ #sheet{right:16px;top:90px;width:360px;max-height:calc(100vh - 110px);border-radius:14px;padding:14px 16px}
+}
+@media (max-width:759px){
+ .wrap{padding:8px 8px 70px}
+ #sheet{left:0;right:0;bottom:0;max-height:62vh;border-radius:16px 16px 0 0;padding:14px 16px calc(18px + env(safe-area-inset-bottom))}
+ .hide-m{display:none}
+ #filters{display:none}
+ #filters.open{display:block}
+ .chips{flex-wrap:wrap;overflow:visible} /* na mobilu se vrstvy a přepínače IN/OUT zalamují, aby byly všechny vidět */
+ #moreBtn{display:inline-flex}
+ #more{display:none;margin-top:-2px}
+ #more.open{display:flex}
+ .bar{gap:6px}
+ .bar input[type=date]{max-width:150px}
+ #cv{cursor:default}
+}
